@@ -5,7 +5,6 @@ package horror
 
 import (
 	"errors"
-	"fmt"
 	"net/http"
 )
 
@@ -18,6 +17,8 @@ type Error interface {
 	error
 }
 
+// WithError wraps horror.Handler, adapts it and returns http.Handler that
+// can be used with other APIs that relies on go standard library.
 func WithError(h Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if err := h.ServeHTTP(w, r); err != nil {
@@ -42,22 +43,4 @@ func (h handlerFunc) ServeHTTP(w http.ResponseWriter, r *http.Request) error {
 
 func HandlerFunc(f func(w http.ResponseWriter, r *http.Request) error) Handler {
 	return handlerFunc(f)
-}
-
-type statusError struct {
-	code int
-	body []byte
-}
-
-func (s statusError) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(s.code)
-	w.Write(s.body)
-}
-
-func (s statusError) Error() string {
-	return fmt.Sprintf(`horror: code=%d, http error body="%s"`, s.code, s.body)
-}
-
-func Status(code int, body []byte) Error {
-	return statusError{code: code, body: body}
 }
