@@ -32,6 +32,13 @@ type Adapter struct {
 
 // WithError wraps horror.Handler, adapts it and returns http.Handler that
 // can be used with other APIs that relies on go standard library.
+//
+// This method will never use internal server error handler registered
+// with horror.RegisterInternalServerErrorHandler function. You have to define
+// your own InternalHandler with horror.AdapterBuilder. Otherwise:
+// horror.Adapter will use default internal server error handler that writes
+// string returned by error.Error() to http.ResponseWriter with
+// http.StatusInterlaServerError code.
 func (a Adapter) WithError(h Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if err := h.ServeHTTP(w, r); err != nil {
