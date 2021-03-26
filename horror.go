@@ -4,6 +4,7 @@ package horror
 //go:generate go fmt ./...
 
 import (
+	"errors"
 	"fmt"
 	"net/http"
 )
@@ -19,16 +20,16 @@ type Error interface {
 
 func WithError(h Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		err := h.ServeHTTP(w, r)
-
-		switch casted := err.(type) {
-		case Error:
-			casted.ServeHTTP(w, r)
-			return
-		default:
-			fh := getInternalServerErrorHandler(r.Context())
-			fh(err, w, r)
-			return
+		if err := h.ServeHTTP(w, r); err != nil {
+			var horrorError Error
+			if errors.As(err, &horrorError) {
+				horrorError.ServeHTTP(w, r)
+				return
+			} else {
+				fh := getInternalServerErrorHandler(r.Context())
+				fh(err, w, r)
+				return
+			}
 		}
 	})
 }
