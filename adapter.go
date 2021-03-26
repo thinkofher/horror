@@ -5,20 +5,20 @@ import (
 	"net/http"
 )
 
-// AdapterBuilder holds arguments for creating new horror.Adapter.
+// AdapterBuilder holds arguments for creating new Adapter.
 type AdapterBuilder struct {
 	// BeforeError is the function that will be called by Adapter.WithError
-	// method before using ServerHTTP method of horror.Error interface.
+	// method before using ServerHTTP method of Error interface.
 	BeforeError func(error, http.ResponseWriter, *http.Request)
 
 	// AfterError is the function that will be called by Adapter.WithError
-	// method after using ServerHTTP method of horror.Error interface.
+	// method after using ServerHTTP method of Error interface.
 	AfterError      func(error, http.ResponseWriter, *http.Request)
 	InternalHandler func(error, http.ResponseWriter, *http.Request)
 	WrapInternal    bool
 }
 
-// Adapter creates a custom way for adapting the horror.Handler to the
+// Adapter creates a custom way for adapting the Handler to the
 // standard http.Handler implementation with it's WithError method.
 //
 // You should always use New factory function with AdapterBuilder structure
@@ -30,15 +30,15 @@ type Adapter struct {
 	wrapInternal    bool
 }
 
-// WithError wraps horror.Handler, adapts it and returns http.Handler that
+// WithError wraps Handler, adapts it and returns http.Handler that
 // can be used with other APIs that relies on go standard library.
 //
 // This method will never use internal server error handler registered
-// with horror.RegisterInternalServerErrorHandler function. You have to define
-// your own InternalHandler with horror.AdapterBuilder. Otherwise:
-// horror.Adapter will use default internal server error handler that writes
-// string returned by error.Error() to http.ResponseWriter with
-// http.StatusInterlaServerError code.
+// with RegisterInternalServerErrorHandler function. You have to define
+// your own InternalHandler with AdapterBuilder. Otherwise: Adapter will
+// use default internal server error handler that writes string returned by
+// error.Error() to http.ResponseWriter with http.StatusInterlaServerError
+// code.
 func (a Adapter) WithError(h Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if err := h.ServeHTTP(w, r); err != nil {
@@ -68,7 +68,7 @@ func doNothing(error, http.ResponseWriter, *http.Request) {}
 // NewAdapter returns pointer to Adapter that is safe to use and will
 // not panic during runtime because of nil pointers.
 //
-// Using NewAdapter is only preferable way to create horror.Adapter.
+// Using NewAdapter is only preferable way to create Adapter.
 func NewAdapter(b *AdapterBuilder) (a *Adapter) {
 	// allocate default adapter
 	a = &Adapter{
