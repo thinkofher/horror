@@ -55,8 +55,7 @@ func (s statusError) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func (s statusError) Error() string {
-	msg := string(s.body)
-	return fmt.Sprintf(`horror: code=%d, http error body="%s"`, s.code, msg)
+	return fmt.Sprintf(`horror: code=%d, http error body="%s"`, s.code, s.body)
 }
 
 func Status(code int, body []byte) Error {
