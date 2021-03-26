@@ -1,6 +1,7 @@
 package horror
 
 //go:generate go run cmd/generrors/main.go
+//go:generate go fmt ./...
 
 import (
 	"fmt"
