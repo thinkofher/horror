@@ -13,9 +13,16 @@ type AdapterBuilder struct {
 
 	// AfterError is the function that will be called by Adapter.WithError
 	// method after using ServerHTTP method of Error interface.
-	AfterError      func(error, http.ResponseWriter, *http.Request)
+	AfterError func(error, http.ResponseWriter, *http.Request)
+
+	// InternalHandler is the function that will be called when
+	// Adapter.WithError method will meet error without ServeHTTP method.
 	InternalHandler func(error, http.ResponseWriter, *http.Request)
-	WrapInternal    bool
+
+	// WrapInternal is the flag. When set to true: BeforeError and AfterError
+	// functions will ba called before and after internal server error
+	// handled by InternalHandler function.
+	WrapInternal bool
 }
 
 // Adapter creates a custom way for adapting the Handler to the
