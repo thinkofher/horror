@@ -28,6 +28,9 @@ func (e jsonError) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	_ = json.NewEncoder(w).Encode(e)
 }
 
+// square is horror.HandlerFunc that accepts number through arg url query
+// parameter and returns result of square of given number in form of json
+// response.
 func square(w http.ResponseWriter, r *http.Request) error {
 	input := r.URL.Query().Get("arg")
 
