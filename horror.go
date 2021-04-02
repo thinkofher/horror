@@ -15,8 +15,8 @@ import (
 // adding error as return value.
 //
 // You can propagate error value further and eventually wrap it with
-// fmt.Errorf when implementing ServeHTTP method. The logic of specific error
-// handling can be encapsulated with Error interface.
+// fmt.Errorf when implementing ServeHTTP method. The logic for handling
+// specific erorrs can be encapsulated in the Error interface.
 type Handler interface {
 	ServeHTTP(http.ResponseWriter, *http.Request) error
 }
