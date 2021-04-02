@@ -5,6 +5,9 @@ import (
 	"net/http"
 )
 
+// Status is standard error used by status package. It satisfies horror.Error
+// interface and can be used safely with horror.Handler interface
+// implementations.
 type Status struct {
 	code int
 	body []byte
