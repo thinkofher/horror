@@ -41,11 +41,10 @@ type Adapter struct {
 // can be used with other APIs that relies on go standard library.
 //
 // This method will never use internal server error handler registered
-// with RegisterInternalServerErrorHandler function. You have to define
-// your own InternalHandler with AdapterBuilder. Otherwise: Adapter will
-// use default internal server error handler that writes string returned by
-// error.Error() to http.ResponseWriter with http.StatusInterlaServerError
-// code.
+// with InternalHandler function. You have to define your own InternalHandler
+// with AdapterBuilder. Otherwise: Adapter will use default internal server
+// error handler that writes string returned by error.Error() to
+// http.ResponseWriter with http.StatusInterlaServerError code.
 func (a Adapter) WithError(h Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if err := h.ServeHTTP(w, r); err != nil {

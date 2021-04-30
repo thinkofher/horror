@@ -10,7 +10,7 @@ with existing go code based on http.Handler interface.
 If you're interested how to use this module, please see examples that are
 placed in `examples` directory.
 
-See `github.com/thinkofher/horror/status` for convenient http errors that
+See "github.com/thinkofher/horror/status" for convenient http errors that
 satisfy Error interface from this module.
 */
 package horror

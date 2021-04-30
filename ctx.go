@@ -8,7 +8,8 @@ import (
 // InternalHandler returns http middleware that can be used by popular http go
 // router libraries. Returned middleware injects given function f as new
 // default internal server error handler, that will be called when WithError
-// function will meet unknown error that doesn't satisfy horror.Error interface.
+// function will meet unknown error that doesn't satisfy Error (from horror package)
+// interface.
 //
 // Be aware that Adapter, no matter what, will never use registered function.
 // You have to use AdapterBuilder to overwrite default behaviour.

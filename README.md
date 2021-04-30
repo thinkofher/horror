@@ -2,11 +2,11 @@
 
 Package __horror__ implements interfaces for http error handling.
 
-Horror was created to simplify error handling with standard go http.Handlers
+Horror was created to simplify error handling with standard go `http.Handler`
 and give developers tools to encapsulate common error scenarios.
 
-Thanks to `WithError` function and `Adapter` type you can use horror.Handlers
-with existing go code based on http.Handler interface.
+Thanks to `WithError` function and `Adapter` type you can use `horror.Handler`
+with existing go code based on `http.Handler` interface.
 
 If you're interested how to use this module, please see examples that are
 placed in [examples](./examples) directory.
