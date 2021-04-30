@@ -1,5 +1,9 @@
 # Horror
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/thinkofher/horror)](https://goreportcard.com/report/github.com/thinkofher/horror)
+[![Go Reference](https://pkg.go.dev/badge/github.com/thinkofher/horror.svg)](https://pkg.go.dev/github.com/thinkofher/horror)
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/thinkofher/horror)
+
 Package __horror__ implements interfaces for http error handling.
 
 Horror was created to simplify error handling with standard go `http.Handler`
