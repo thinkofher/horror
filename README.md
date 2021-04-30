@@ -2,7 +2,7 @@
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/thinkofher/horror)](https://goreportcard.com/report/github.com/thinkofher/horror)
 [![Go Reference](https://pkg.go.dev/badge/github.com/thinkofher/horror.svg)](https://pkg.go.dev/github.com/thinkofher/horror)
-![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/thinkofher/horror)
+[![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/thinkofher/horror)](https://github.com/thinkofher/horror/tags)
 
 Package __horror__ implements interfaces for http error handling.
 
