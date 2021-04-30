@@ -54,15 +54,14 @@ func (a Adapter) WithError(h Handler) http.Handler {
 				horrorError.ServeHTTP(w, r)
 				a.afterErr(err, w, r)
 				return
-			} else {
-				if a.wrapInternal {
-					a.beforeErr(err, w, r)
-				}
-				a.internalHandler(err, w, r)
-				if a.wrapInternal {
-					a.afterErr(err, w, r)
-				}
-				return
+			}
+
+			if a.wrapInternal {
+				a.beforeErr(err, w, r)
+			}
+			a.internalHandler(err, w, r)
+			if a.wrapInternal {
+				a.afterErr(err, w, r)
 			}
 		}
 	})

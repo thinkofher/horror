@@ -21,7 +21,6 @@ func InternalHandler(f func(error, http.ResponseWriter, *http.Request)) func(htt
 				errorHandlerFunc(f),
 			)
 			next.ServeHTTP(w, r.WithContext(newCtx))
-			return
 		})
 	}
 }
@@ -29,7 +28,6 @@ func InternalHandler(f func(error, http.ResponseWriter, *http.Request)) func(htt
 func defaultInternalServerErrorHandler(e error, w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusInternalServerError)
 	w.Write([]byte(e.Error()))
-	return
 }
 
 type horrorCtxKey int

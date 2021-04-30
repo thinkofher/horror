@@ -52,11 +52,9 @@ func WithError(h Handler) http.Handler {
 			if errors.As(err, &horrorError) {
 				horrorError.ServeHTTP(w, r)
 				return
-			} else {
-				fh := getInternalServerErrorHandler(r.Context())
-				fh(err, w, r)
-				return
 			}
+			fh := getInternalServerErrorHandler(r.Context())
+			fh(err, w, r)
 		}
 	})
 }
