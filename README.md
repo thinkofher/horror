@@ -12,7 +12,7 @@ and give developers tools to encapsulate common error scenarios.
 Thanks to `WithError` function and `Adapter` type you can use `horror.Handler`
 with existing go code based on `http.Handler` interface.
 
-If you're interested how to use this module, please see examples that are
+If you're interested in using this module, please see examples that are
 placed in [examples](./examples) directory.
 
 See [github.com/thinkofher/horror/status](./status/doc.go) for convenient http errors that
