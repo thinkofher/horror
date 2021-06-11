@@ -55,14 +55,10 @@ func WithError(h Handler) http.Handler {
 	})
 }
 
-// HandlerFunc is an adapter that will use given f as ServeHTTP method for
-// returned Handler.
-func HandlerFunc(f func(w http.ResponseWriter, r *http.Request) error) Handler {
-	return handlerFunc(f)
-}
+// HandlerFunc is an adapter type that wraps function to use it
+// as regular Handler interface.
+type HandlerFunc func(w http.ResponseWriter, r *http.Request) error
 
-type handlerFunc func(http.ResponseWriter, *http.Request) error
-
-func (h handlerFunc) ServeHTTP(w http.ResponseWriter, r *http.Request) error {
+func (h HandlerFunc) ServeHTTP(w http.ResponseWriter, r *http.Request) error {
 	return h(w, r)
 }
